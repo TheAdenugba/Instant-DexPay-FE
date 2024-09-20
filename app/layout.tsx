@@ -1,6 +1,18 @@
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import StoreProvider from "@/store/StoreProvider";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '@/utils/theme';
+
+
+// const roboto = Roboto({
+//   weight: ['300', '400', '500', '700'],
+//    subsets: ['latin'],
+//    display: 'swap',
+//    variable: '--font-roboto',
+// });
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,13 +35,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <StoreProvider>
+      <AppRouterCacheProvider options={{ key: 'css' }}>
+        <ThemeProvider theme={theme}>
+
+          <html lang="en">
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              {children}
+            </body>
+          </html>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
+    </StoreProvider>
   );
 }
