@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathName = usePathname();
-  const [useDarkTheme, setUseDarkTheme] = useState(false);
+  const [useDarkTheme, setUseDarkTheme] = useState(true);
   const [themes, setThemes] = useState(useDarkTheme ? darkTheme : lightTheme);
 
   const changeThemeHandler = (target: ChangeEvent, currentValue: boolean) => {
