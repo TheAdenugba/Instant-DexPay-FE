@@ -1,21 +1,26 @@
 "use client";
 
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
+import ReviewSendMoney from "@/components/send/ReviewSendMoney";
+import SendMoney from "@/components/send/SendMoney";
+import { useState } from "react";
 
+enum FLOW {
+  SEND_MONEY = 'send_money',
+  REVIEW = 'review'
+}
 export default function Home() {
+  const [sendFlow, setSendFlow] = useState(FLOW.SEND_MONEY)
+
+  const handleClick = () => setSendFlow(FLOW.REVIEW)
+
+  const sendMoneyFlow = {
+    [FLOW.SEND_MONEY]: <SendMoney handleClick={handleClick} />,
+    [FLOW.REVIEW]: <ReviewSendMoney handleClick={() => setSendFlow(FLOW.SEND_MONEY)} />
+  }
+
   return (
-    <Grid container height="calc(100vh - 38px)" alignItems="center" justifyContent="center" direction="column">
-      <h1 className="text-blue-600">Using Material UI with Next.js 13</h1>
-      <h4 className="text-red-500">(with Tailwind CSS)</h4>{" "}
-      <Stack direction="row" columnGap={1}>
-        <Button variant="text" className="text-red-500 bg-gray-200">
-          Text
-        </Button>
-        <Button variant="contained">Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-      </Stack>
-    </Grid>
+    <section className="flex justify-center">
+      {sendMoneyFlow[sendFlow]}
+    </section>
   );
 }

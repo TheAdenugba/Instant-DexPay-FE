@@ -1,70 +1,53 @@
 'use Client'
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 import Email from '@/app/assets/icons/email'
 import Google from '@/app/assets/icons/google'
 import Sync from '@/app/assets/icons/sync'
 import { Button } from '@mui/material'
-import AppInput from './AppInput'
+import AppInput from '../AppInput'
 import SwapIcon from "@/app/assets/icons/swap";
+import AppText from '../AppText'
 
 type Props = {
     handleClick: () => void
 }
-const SwapToken = ({ handleClick }: Props) => {
-    const [btnAction, setBtnAction] = useState<string | null>("Buy");
+const SendMoney = ({ handleClick }: Props) => {
     const [currency, setCurrency] = useState("NGN");
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState(0);
 
-    const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleAmountChange = (event) => {
         setAmount(event.target.value);
     };
     const currencyOptions = ["NGN", "USD", "EUR"];
 
     return (
         <div className="p-6 rounded-lg w-[30%] bg-gray-900">
-            <div className="flex mb-4 bg-[#262f3d] p-2 rounded-xl space-x-2">
-                <Button
-                    variant="text"
-                    color="inherit"
-                    fullWidth
-                    className={`${btnAction === "Buy" ? "bg-gray-700" : "text-gray-400"}`}
-                    onClick={() => setBtnAction("Buy")}
-                >
-                    Buy
-                </Button>
-                <Button
-                    variant="text"
-                    color="inherit"
-                    fullWidth
-                    className={`${btnAction === "Sell" ? "bg-gray-700" : "text-gray-400"}`}
-                    onClick={() => setBtnAction("Sell")}
-                >
-                    Sell
-                </Button>
+            <div className='flex space-x-4 justify-between mb-6'>
+                <AppText text='Send Money' className='font-semibold' />
             </div>
 
-            <div className="w-full mt-8">
+            <div className="w-full">
                 <AppInput
-                    label="Amount to buy"
+                    label="Amount to send"
                     amount={amount}
                     onAmountChange={handleAmountChange}
                     currency={currency}
                     setCurrency={setCurrency}
                     currencyOptions={currencyOptions}
+                    extraLabel='Balance: 500.00 USDT'
                 />
 
-                <div className="mt-2 text-sm text-white flex items-center">
-                    <span>1.00 USDT = ₦1,498.00</span>
-                    <Sync className="ml-2 mr-1" />
-                    <span>Est. fee: $1.90</span>
-                </div>
-
-                <div className="flex justify-center my-4">
-                    <SwapIcon className="size-4 cursor-pointer" />
+                <div className="mt-2 mb-8 text-xs text-white flex justify-between items-center">
+                    <div className='flex items-center'>
+                        <span>1.00 USDT = ₦1,498.00</span>
+                        <Sync className="ml-2 mr-1" />
+                        <span>Est. fee: $1.90</span>
+                    </div>
+                    <AppText text='Network: BEP20' />
                 </div>
 
                 <AppInput
-                    label="Amount to receive"
+                    label="Recipient receives"
                     amount={amount}
                     onAmountChange={handleAmountChange}
                     currency={currency}
@@ -95,8 +78,12 @@ const SwapToken = ({ handleClick }: Props) => {
                     </Button>
                 </section>
             </div>
+
+            <div className='flex justify-center mt-8'>
+                <AppText className='text-gray-600 text-lg' text={`© ${new Date().getFullYear()} Powered by DexPay`} />
+            </div>
         </div>
     )
 }
 
-export default SwapToken
+export default SendMoney

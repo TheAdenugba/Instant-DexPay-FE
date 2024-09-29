@@ -1,4 +1,5 @@
 "use client";
+import { Work_Sans } from 'next/font/google'
 import { darkTheme, lightTheme } from "@/utils/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import "./globals.css";
@@ -9,6 +10,13 @@ import { ChangeEvent, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ReactQueryClientProvider } from "@/utils/RectQueryClient";
 import AppHeader from "@/components/AppHeader";
+
+const workSans = Work_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-work-sans',
+})
 
 export default function RootLayout({
   children,
@@ -46,7 +54,7 @@ export default function RootLayout({
           <StoreProvider>
             <StyledEngineProvider injectFirst>
               <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                <body id="__next">
+                <body id="__next" className={workSans.className}>
                   <CssBaseline />
                   <AppHeader
                     LinkItems={LinkItems}
