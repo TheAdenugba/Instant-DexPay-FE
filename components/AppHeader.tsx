@@ -1,5 +1,5 @@
 import { IconButton, Select, MenuItem, FormControlLabel, Switch } from '@mui/material'
-import router from 'next/router'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
     onChange?: ((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void)
 }
 const AppHeader = ({ LinkItems, pathName, useDarkTheme, onChange }: Props) => {
+    const router = useRouter()
     return (
         <header className="flex justify-between items-center p-4 border-b border-gray-700">
             <div className="flex items-center space-x-4">
