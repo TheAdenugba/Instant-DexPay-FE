@@ -1,6 +1,6 @@
 import { Modal, Box, Button } from '@mui/material'
 import React from 'react'
-import AppText from './AppText'
+import AppText from '../AppText'
 
 type Props = {
     isOpen: boolean
@@ -14,8 +14,16 @@ const MakeRepayment = ({ isOpen, onClose, onOpenConfirmPayment }: Props) => {
             onClose={onClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            slotProps={{
+                backdrop: {
+                    sx: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',  // Semi-transparent background
+                        backdropFilter: 'blur(10px)',
+                    },
+                },
+            }}
         >
-            <Box className={'bg-gray-900 p-4 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
+            <Box className={'bg-gray-900 p-7 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
                 <div className="flex flex-col space-y-4">
                     <div className="flex justify-between">
                         <AppText className='font-semibold text-xl' text='Make Payment' />

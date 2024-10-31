@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const AppSelect = ({
+const TextSelect = ({
     name,
     value,
     defaultValue,
@@ -68,7 +68,10 @@ const AppSelect = ({
                 }}
 
                 sx={{
-                    borderRadius: '8px',
+                    borderTopRightRadius: '8px',
+                    borderTopLeftRadius: '0px',
+                    borderBottomLeftRadius: '0px',
+                    borderBottomRightRadius: '8px',
                     border: "1px solid #636363",
                     color: "#fff",
                     "& .MuiSelect-select": {
@@ -100,4 +103,4 @@ const AppSelect = ({
     );
 };
 
-export default AppSelect;
+export default TextSelect;

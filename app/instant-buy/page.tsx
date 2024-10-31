@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import ReviewBuyTrade from "@/components/ReviewBuyTrade";
-import SwapToken from "@/components/SwapToken";
+import ReviewBuyTrade from "@/components/instantBuy/ReviewBuyTrade";
+import SwapToken from "@/components/instantBuy/SwapToken";
 
 enum FLOW {
     SWAP = 'swap',

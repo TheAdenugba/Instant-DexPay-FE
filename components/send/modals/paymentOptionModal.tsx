@@ -1,7 +1,7 @@
 import SpinnerIcon from '@/app/assets/icons/spinnerIcon';
 import { Modal, Box } from '@mui/material';
 import React from 'react'
-import AppText from '../AppText';
+import AppText from '../../AppText';
 import CloseIcon from '@/app/assets/icons/closeIcon';
 import UserIcon from '@/app/assets/icons/userIcon';
 import BankIcon from '@/app/assets/icons/bankIcon';

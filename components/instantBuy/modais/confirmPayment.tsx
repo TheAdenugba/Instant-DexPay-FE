@@ -1,22 +1,30 @@
 'use client'
 import { Modal, Box, Button } from '@mui/material'
 import React from 'react'
-import AppText from '../AppText'
+import AppText from '../../AppText'
 import SpinnerIcon from '@/app/assets/icons/spinnerIcon'
 
 type Props = {
     isConfirmPayment: boolean;
     onCloseConfirmPayment: () => void
 }
-const TransactionProcessingModal = ({ isConfirmPayment, onCloseConfirmPayment }: Props) => {
+const ConfirmPayment = ({ isConfirmPayment, onCloseConfirmPayment }: Props) => {
     return (
         <Modal
             open={isConfirmPayment}
             onClose={onCloseConfirmPayment}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            slotProps={{
+                backdrop: {
+                    sx: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',  // Semi-transparent background
+                        backdropFilter: 'blur(10px)',
+                    },
+                },
+            }}
         >
-            <Box className={'bg-gray-900 p-4 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
+            <Box className={'bg-gray-900 px-5 py-8 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
                 <div className="flex flex-col space-y-4">
                     <div className="flex justify-end mb-6">
                         <Button
@@ -65,4 +73,4 @@ const TransactionProcessingModal = ({ isConfirmPayment, onCloseConfirmPayment }:
     )
 }
 
-export default TransactionProcessingModal
+export default ConfirmPayment

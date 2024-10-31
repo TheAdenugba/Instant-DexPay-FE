@@ -39,3 +39,26 @@ input[type="number"] {
 .work-sans {
   font-family: var(--font-work-sans);
 }
+
+.custom-connect-btn-container {
+  width: 100%;
+  margin-bottom: 12px; /* Same as mb-3 */
+}
+
+.custom-connect-btn {
+  background-color: white;
+  color: black;
+  border-radius: 12px; /* Same as rounded-xl */
+  text-transform: capitalize; /* Same as capitalize */
+  padding: 12px 24px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.custom-connect-btn:hover {
+  background-color: #f5f5f5; /* Add hover effect */
+}

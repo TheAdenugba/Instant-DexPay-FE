@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { MenuItem, Select } from "@mui/material";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
     currency: string;
     setCurrency: (value: string) => void;
     currencyOptions: string[]; // Array of currency options
-    extraLabel?: string
+    extraLabel?: string;
 }
 const AppInput = ({
     label,
@@ -17,14 +17,16 @@ const AppInput = ({
     currency,
     setCurrency,
     currencyOptions,
-    extraLabel
+    extraLabel,
 }: Props) => {
     return (
         <main>
-            <label htmlFor="amount" className="text-sm font-medium text-white mb-1 flex justify-between items-center">
+            <label
+                htmlFor="amount"
+                className="text-sm font-medium text-white mb-1 flex justify-between items-center"
+            >
                 <div className="text-lg">{label}</div>
                 <div className="text-gray-300 text-md">{extraLabel}</div>
-
             </label>
 
             <div className="relative w-full">

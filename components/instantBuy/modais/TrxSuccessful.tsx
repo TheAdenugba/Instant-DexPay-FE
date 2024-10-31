@@ -1,14 +1,14 @@
 'use client'
 import { Modal, Box, Button } from '@mui/material'
 import React from 'react'
-import AppText from '../AppText'
+import AppText from '../../AppText'
 import SuccessIcon from '@/app/assets/icons/successIcon'
 
 type Props = {
     isConfirmPayment: boolean;
     onCloseConfirmPayment: () => void
 }
-const SendSuccessful = ({ isConfirmPayment, onCloseConfirmPayment }: Props) => {
+const TrxSuccess = ({ isConfirmPayment, onCloseConfirmPayment }: Props) => {
     return (
         <Modal
             open={isConfirmPayment}
@@ -52,4 +52,4 @@ const SendSuccessful = ({ isConfirmPayment, onCloseConfirmPayment }: Props) => {
     )
 }
 
-export default SendSuccessful
+export default TrxSuccess
