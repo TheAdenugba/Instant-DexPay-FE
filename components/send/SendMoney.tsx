@@ -13,7 +13,7 @@ type Props = {
 }
 const SendMoney = ({ handleClick }: Props) => {
     const [currency, setCurrency] = useState("NGN");
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState('');
 
     const handleAmountChange = (event) => {
         setAmount(event.target.value);

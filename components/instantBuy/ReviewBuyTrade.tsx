@@ -1,11 +1,12 @@
 import { Button, Checkbox, Divider, Radio, Switch } from '@mui/material'
 import React from 'react'
-import AppText from './AppText'
+import AppText from '../AppText'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import useDisclosure from '@/utils/useDisclosure';
 // import ConfirmPayment from './confirmPayment';
 import MakeRepayment from './MakeRepayment';
-import TrxSuccess from './TrxSuccessful';
+import TrxSuccess from './modais/TrxSuccessful';
+import ConfirmPayment from './modais/confirmPayment';
 
 type Props = {
     handleClick: () => void
@@ -14,16 +15,17 @@ type Props = {
 const ReviewBuyTrade = ({ handleClick }: Props) => {
     const [selectedValue, setSelectedValue] = React.useState('a');
     const { isOpen, onClose, onOpen } = useDisclosure()
+    const { isOpen: isTrxOpen, onClose: onCloseTrx, onOpen: onOpenTrx } = useDisclosure()
     const { isOpen: isConfirmPayment, onClose: onCloseConfirmPayment, onOpen: onOpenConfirmPayment } = useDisclosure()
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
     console.log(isOpen)
     return (
-        <main className='w-1/3'>
+        <main className='w-[35%]'>
             <Button onClick={handleClick} className='text-white' startIcon={<ArrowBackIcon />}>Back</Button>
 
-            <div className="p-6 rounded-lg w-full bg-gray-900">
+            <div className="px-7 py-8 rounded-lg w-full h-auto bg-gray-900">
                 <div className='flex space-x-4 justify-between'>
                     <AppText text='Review Buy Trade' className='font-semibold' />
                     <AppText text='1.00 USDT = ₦1,498.78' className='font-medium text-gray-400 text-sm' />
@@ -88,13 +90,13 @@ const ReviewBuyTrade = ({ handleClick }: Props) => {
                         </div>
                     </div>
 
-                    <div className='flex space-x-1 items-center'>
+                    <div className='flex space-x-1 my-3 items-center'>
                         <Checkbox className='text-[#F41449]' defaultChecked />
                         <AppText text='I agree to the' className='font-medium' />
                         <AppText text='Terms of Trade' className='font-medium underline' />
                     </div>
 
-                    <section className="flex space-x-4 w-full">
+                    <section className="flex space-x-4 w-full mt-8">
                         <Button
                             variant="outlined"
                             fullWidth
@@ -113,12 +115,15 @@ const ReviewBuyTrade = ({ handleClick }: Props) => {
                         </Button>
                     </section>
                 </div>
+                <div className='flex justify-center mt-10'>
+                    <AppText className='text-gray-600 text-lg' text={`© ${new Date().getFullYear()} Powered by DexPay`} />
+                </div>
 
                 <MakeRepayment isOpen={isOpen} onClose={onClose} onOpenConfirmPayment={onOpenConfirmPayment} />
 
-                {/* <ConfirmPayment isConfirmPayment={isConfirmPayment} onCloseConfirmPayment={onCloseConfirmPayment} /> */}
+                <ConfirmPayment isConfirmPayment={isConfirmPayment} onCloseConfirmPayment={onCloseConfirmPayment} />
 
-                <TrxSuccess isConfirmPayment={isConfirmPayment} onCloseConfirmPayment={onCloseConfirmPayment} />
+                <TrxSuccess isConfirmPayment={isTrxOpen} onCloseConfirmPayment={onCloseTrx} />
             </div>
 
         </main>
