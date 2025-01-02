@@ -2,6 +2,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Select, Typography } from "@mui/material";
+import { shortenedAddress } from "@/utils";
 
 const useStyles = makeStyles(() => ({
     select: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles(() => ({
             borderRadius: "32px",
             background: "#2E2E2E !important",
         },
+        "& .MuiSelect-select": {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        }
     },
     success: {
         color: "#14C005",
@@ -41,14 +48,18 @@ const AppSelect = ({
     return (
         <>
             <Select
+                placeholder="--Select--"
                 labelId="demo-simple-select-helper-label"
                 id="outlined-select-currency-native"
                 defaultValue={defaultValue}
-                className={classes.select}
+                className={`${classes.select} text-sm`}
                 name={name}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e.target.value)}
                 value={value}
                 disabled={disabled}
+                renderValue={(value: unknown) =>
+                    value && typeof value === 'string' ? shortenedAddress(value) : 'Select Address'
+                }
                 MenuProps={{
                     sx: {
                         "& .MuiMenu-paper": {

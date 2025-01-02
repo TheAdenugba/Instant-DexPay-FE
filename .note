@@ -1,0 +1,27 @@
+quick trade as new name -> send money -> p2p✅
+add the links above the modal✅
+
+fix input color✅
+dispute modal✅
+select dropdown from react-select ✅
+
+feedbacks
+
+- inactive button for proceed to buy ✅
+- p2p market for mobile set (highlighted button) move to far right. ✅
+  -confirmation modal before you make any payment ✅
+
+- cancel trade modal ✅
+  -TrxSuccess modal ✅
+  -select third option to add new address ✅
+- remove minimum order 5 ✅
+
+- whats is the network thing bep20 ✅
+- first page put estimate fee down for mobile ✅
+
+when i put an amount it shows the converted amount but shows a toast of no ads
+
+- put second mobile-header-nav in the main.tsx ✅
+- work on the send money part (tweaking what we have on sell to fit it)
+
+network on sell to be fixed ✅

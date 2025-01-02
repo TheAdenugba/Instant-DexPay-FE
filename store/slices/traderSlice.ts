@@ -28,6 +28,7 @@ interface TradeState {
 
 const initialState: TradeState = {
     tradeData: {
+        _id: "",
         type: "",
         paymentAccountId: "",
         fiat: "NGN",
@@ -45,6 +46,7 @@ const initialState: TradeState = {
         prefix: "+",
         minPriceLimit: null,
         maxPriceLimit: null,
+        walletAddress: "",
     },
     payments: [],
     paymentAccount: {
@@ -100,6 +102,7 @@ const initialState: TradeState = {
         paymentAccountId: "",
         serviceFee: "",
         inputField: "",
+        walletAddress: "",
     },
     overviewTab: 0,
     additionalQuantity: 0,

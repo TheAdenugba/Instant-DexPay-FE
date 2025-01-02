@@ -119,6 +119,7 @@ const SwapTokenInput = ({
                 }
 
                 sx={{
+                    // width: '100% !important',
                     border: `1px solid #636363`,
                     borderTopLeftRadius: '8px',
                     borderBottomLeftRadius: '8px',

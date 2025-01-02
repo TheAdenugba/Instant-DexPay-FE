@@ -11,16 +11,20 @@ import { bscTestnet, bsc } from "viem/chains";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import "./globals.css";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-// import StoreProvider from "@/store/StoreeProvider";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { ChangeEvent, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactQueryClientProvider } from "@/utils/RectQueryClient";
 import AppHeader from "@/components/AppHeader";
 import { EthereumIcon, SolanaIcon } from "@dynamic-labs/iconic";
 import StoreProvider from "@/store/StoreProvider";
 import { Toaster } from "react-hot-toast";
 import { ToastOptions, useBreakPoints } from "@/utils";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "@/store/store";
+import ExternalLink from "./assets/icons/externalLink";
+import Link from "next/link";
+import Hydrator from "@/utils/Hydrator";
 
 const workSans = Work_Sans({
   weight: "400",
@@ -38,7 +42,7 @@ const config = createConfig({
   },
 });
 
-const evmNetworks = [
+export const evmNetworks = [
   {
     blockExplorerUrls: ['https://bscscan.com'],
     chainId: 56,
@@ -77,6 +81,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+
   const { sm } = useBreakPoints();
   const pathName = usePathname();
   const [useDarkTheme, setUseDarkTheme] = useState(true);
@@ -88,19 +94,17 @@ export default function RootLayout({
   };
   const LinkItems = [
     {
+      href: "/instant-buy",
+      tabName: "Quick Trade",
+    },
+    {
       href: "/",
       tabName: "Send Money",
     },
-
-    {
-      href: "/instant-buy",
-      tabName: "Instant Buy/Sell",
-    },
-    {
-      href: "#",
-      tabName: "DexPay",
-    },
   ];
+
+
+
 
   return (
     <html lang="en">
@@ -167,6 +171,14 @@ export default function RootLayout({
                   `onSignedMessage was called: ${messageToSign}, ${signedMessage}`
                 );
               },
+              onLogout: (args) => {
+                console.log('onLogout was called', args);
+                localStorage.removeItem("provider");
+                localStorage.removeItem("token");
+                localStorage.removeItem("refreshToken");
+                localStorage.removeItem("defaultAsset");
+                localStorage.removeItem("dynamicLoginType");
+              }
             },
           }}
         >
@@ -179,19 +191,54 @@ export default function RootLayout({
                     toastOptions={ToastOptions}
                   />
                   <StoreProvider>
-                    <StyledEngineProvider injectFirst>
-                      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                        <CssBaseline />
-                        <AppHeader
-                          LinkItems={LinkItems}
-                          pathName={pathName}
-                          useDarkTheme={useDarkTheme}
-                          onChange={(target, value) => changeThemeHandler(target, value)}
-                        />
-                        {/* <Header /> */}
-                        <main className=" text-white max-h-screen">{children}</main>
-                      </AppRouterCacheProvider>
-                    </StyledEngineProvider>
+                    <Hydrator />
+                    <PersistGate loading={null} persistor={persistor}>
+                      <StyledEngineProvider injectFirst>
+                        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+                          <CssBaseline />
+                          <AppHeader
+                            LinkItems={LinkItems}
+                            pathName={pathName}
+                            useDarkTheme={useDarkTheme}
+                            onChange={(target, value) => changeThemeHandler(target, value)}
+                          />
+                          {/* <Header /> */}
+                          <nav className="bg-[#101828] mb-10 p-2  w-full block lg:hidden">
+                            <div className="list-none flex justify-between cursor-pointer text-sm sm:text-base">
+                              <div className="flex space-x-2">
+                                {LinkItems.map((el) => {
+                                  return (
+                                    <li
+                                      onClick={() => router.push(el.href)}
+                                      key={el.tabName}
+                                      className={`p-2 border-0 ${pathName === el.href
+                                        ? "border-b-4 border-solid border-b-[#F92556]"
+                                        : "list-none"
+                                        }`}
+                                    >
+                                      {el.tabName}
+                                    </li>
+                                  );
+                                })}
+                              </div>
+
+                              <Link href="https://app.dexpay.io/">
+                                <li
+                                  className={`p-2 text-white border-0 gap-x-2 flex items-center ${pathName === "https://app.dexpay.io/"
+                                    ? "border-b-4 border-solid border-b-[#F92556]"
+                                    : "list-none"
+                                    }`}
+                                >
+                                  P2P
+                                  <ExternalLink />
+                                </li>
+                              </Link>
+                            </div>
+                          </nav>
+                          <main className=" text-white max-h-screen mx-0 md:mx-1">{children}</main>
+                        </AppRouterCacheProvider>
+                      </StyledEngineProvider>
+                    </PersistGate>
                   </StoreProvider>
                 </ThemeProvider>
               </DynamicWagmiConnector>

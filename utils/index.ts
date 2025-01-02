@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import Assets from './assets';
+import { ethers } from "ethers";
 
 
 
@@ -236,5 +237,135 @@ export const fetchTokenAddress = (assets: any, asset: any) => {
         return tokenAddress[0].tokenAddress || tokenAddress.tokenAddress;
     } else {
         return "";
+    }
+};
+
+
+export const getCurrencySymbol = (currency: string) => {
+    switch (currency) {
+        case "NGN":
+            return "₦";
+        case "FDC":
+            return "D";
+        case "GBP":
+            return "£";
+        case "USD":
+            return "$";
+        case "DUSD":
+            return "$";
+        case "USDT":
+            return "$";
+        case "EUR":
+            return "€";
+        default:
+            return "$";
+    }
+};
+
+export const getCurrencyName = (currency: string) => {
+    switch (currency) {
+        case "NGN":
+            return "Naira";
+        case "FDC":
+            return "FiatD";
+        case "GBP":
+            return "Pounds";
+        case "USD":
+            return "Dollars";
+        case "EUR":
+            return "Euro";
+        default:
+            return "FiatD";
+    }
+};
+
+export const getCurrencyCode = (countryCode: string) => {
+    switch (countryCode) {
+        case "NG":
+            return "NGN";
+        case "UK":
+            return "GBP";
+        case "US":
+            return "USDT";
+        default:
+            return "NGN";
+    }
+};
+export const shortenedAddress = (address: string) =>
+    address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
+
+export const getAddressToDisplay = (
+    ownerAddress: any,
+    sellerAddress: any,
+    buyerAddress: any
+) => {
+    if (ownerAddress == sellerAddress) {
+        return buyerAddress;
+    } else {
+        return sellerAddress;
+    }
+};
+
+export const getUsernameToDisplay = (
+    ownerUsername: any,
+    sellerUsername: any,
+    buyerUsername: any
+) => {
+    if (ownerUsername == sellerUsername) {
+        return buyerUsername;
+    } else {
+        return sellerUsername;
+    }
+};
+
+export const getShowVerifiedCheck = (
+    ownerUsername: any,
+    sellerUsername: any,
+    sellerVerifiedCheck: any,
+    buyerVerifiedCheck: any
+) => {
+    if (ownerUsername == sellerUsername) {
+        return buyerVerifiedCheck;
+    } else {
+        return sellerVerifiedCheck;
+    }
+};
+
+export const getNameToDisplay = (ownerName: any, sellerName: any, buyerName: any) => {
+    if (ownerName == sellerName) {
+        return buyerName;
+    } else {
+        return sellerName;
+    }
+};
+
+export const getMinute = (seconds: number) => {
+    const min = Math.floor(seconds / 60);
+    if (String(min).length == 1) {
+        return "0" + min;
+    } else {
+        return min;
+    }
+};
+
+// export const getSeconds = (seconds: number): string => {
+//     const sec = seconds % 60; // Use modulo to get remaining seconds
+//     return sec.toString().padStart(2, "0"); // Ensures 2 digits (e.g., "09")
+// };
+export const getSeconds = (seconds: number) => {
+    const minute = Math.floor(seconds / 60);
+    const sec = Math.round(seconds - minute * 60);
+    if (String(sec).length == 1) {
+        return "0" + sec;
+    } else {
+        return sec;
+    }
+};
+
+export const convertToBigInt = (amount: string | number) => {
+    if (amount === 0 || amount === "0") {
+        return 0;
+    } else {
+        return ethers.parseEther(amount.toString())
     }
 };

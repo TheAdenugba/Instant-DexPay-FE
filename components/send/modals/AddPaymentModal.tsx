@@ -25,7 +25,11 @@ const AddPaymentModal = ({ isAdd, onAddClose }: Props) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box className={'bg-gray-900 p-4 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
+            {/* list of bank details or switch add new bank detail */}
+            <>
+
+            </>
+            {/* <Box className={'bg-gray-900 p-4 w-[28%] rounded-xl absolute translate-x-[-50%] top-2/4 left-2/4 translate-y-[-50%] '} >
                 <div className="flex flex-col space-y-4">
                     <div className='flex space-x-4 justify-between items-center px-2 mt-4'>
                         <AppText text='Add a payment method' className='font-semibold text-lg' />
@@ -47,7 +51,7 @@ const AddPaymentModal = ({ isAdd, onAddClose }: Props) => {
                 <Button size='large' onClick={() => { }} fullWidth className="bg-white rounded-xl text-black capitalize mt-6">
                     Done
                 </Button>
-            </Box>
+            </Box> */}
         </Modal>
     )
 }

@@ -25,16 +25,18 @@ import { isEthereumWallet } from "@dynamic-labs/ethereum";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { RootState } from "@/store/store";
 import { resetTradeState } from "@/store/slices/traderSlice";
+import { useRouter } from "next/navigation";
 
 
 
-const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, setCurrentStep, }: Omit<SimpleDialogProps, 'onClickSwitch'>) => {
+const VerifySignatureDialog = ({ isPending, emailVerified, onClose, open, selectedValue, setCurrentStep, handleVerifySignature }: Omit<SimpleDialogProps, 'onClickSwitch'>) => {
   const { sm } = useBreakPoints();
+  const router = useRouter()
   const { signMessageAsync } = useSignMessage();
   const chainId = useChainId();
   const { CANCELLED, APPROVE } = Assets;
   const { disconnect } = useDisconnect();
-  const { mutateAsync: handleAuthenticate, isPending } = useAuthenticateAddress()
+  const { mutateAsync: handleAuthenticate } = useAuthenticateAddress()
   const { mutateAsync: handleOTP } = useRequestOtp()
   const dispatch = useAppDispatch();
   const { primaryWallet, handleLogOut } = useDynamicContext();
@@ -60,6 +62,7 @@ const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, se
     dispatch(updateIsAuth(false));
     handleClose();
     handleLogOut();
+    router.replace(`/instant-buy`, undefined);
     toast.success("Wallet Disconnected", {
       id: "disconnected",
     });
@@ -85,8 +88,10 @@ const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, se
         dispatch(updateWalletStatus(res.status));
         dispatch(updateUser(res.user));
         setAuthToken(res.auth.accessToken);
+        router.replace(`/instant-buy`, undefined);
         handleClose()
         toast.success("Authentication Successful")
+
       }
     } catch (error: any) {
       dispatch(updateIsAuth(false));
@@ -109,6 +114,7 @@ const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, se
       });
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const signMessage = async () => {
     try {
       if (emailVerified) {
@@ -155,9 +161,9 @@ const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, se
 
   }
 
-  const handleVerify = () => {
-    signMessage();
-  };
+  // const handleVerify = () => {
+  //   signMessage();
+  // };
 
   return (
     <Dialog
@@ -210,7 +216,7 @@ const VerifySignatureDialog = ({ emailVerified, onClose, open, selectedValue, se
           </div>
           <div className={classes.btnDiv}>
             <Button
-              onClick={() => handleVerify()}
+              onClick={() => handleVerifySignature?.()}
               disabled={isPending}
               sx={{
                 marginTop: "48px",

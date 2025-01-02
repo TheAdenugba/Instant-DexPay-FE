@@ -740,13 +740,13 @@ export const InputStyle = makeStyles(() => ({
         },
         "& .MuiInputBase-input.Mui-disabled": {
             WebkitTextFillColor: "#fff",
-            borderRadius: "32px",
-            background: "#2E2E2E",
+            // borderRadius: "32px",
+            // background: "#2E2E2E",
         },
         "& .MuiOutlinedInput-root.Mui-disabled": {
             WebkitTextFillColor: "#fff",
-            borderRadius: "32px",
-            background: "#2E2E2E !important",
+            // borderRadius: "32px",
+            // background: "#2E2E2E !important",
         },
         "& label.Mui-focused": {
             color: "green",
@@ -784,13 +784,13 @@ export const InputStyle = makeStyles(() => ({
         },
         "& .MuiInputBase-input.Mui-disabled": {
             WebkitTextFillColor: "#fff",
-            borderRadius: "32px",
-            background: "#2E2E2E",
+            // borderRadius: "32px",
+            // background: "#2E2E2E",
         },
         "& .MuiOutlinedInput-root.Mui-disabled": {
             WebkitTextFillColor: "#fff",
-            borderRadius: "32px",
-            background: "#2E2E2E !important",
+            // borderRadius: "32px",
+            // background: "#2E2E2E !important",
         },
         "& label.Mui-focused": {
             color: "green",
@@ -886,12 +886,12 @@ export const LabelStyle = makeStyles(() => ({
         // marginBottom: "12px",
     },
     labelDivSecond: {
-        width: "100%",
+        // width: "100%",
         marginTop: "10px",
     },
     labelDiv: {
         marginBottom: "32px",
-        width: "100%",
+        // width: "100%",
     },
     textLabelDiv: {
         display: "flex",

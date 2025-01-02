@@ -11,8 +11,10 @@ export interface ExpressOrderDataState {
     paymentAccountId: string;
     serviceFee: string;
     inputField: string;
+    walletAddress: string;
 }
 export interface TradePostDataState {
+    _id: string;
     type: string;
     paymentAccountId: string;
     fiat: string;
@@ -30,6 +32,7 @@ export interface TradePostDataState {
     prefix: string;
     minPriceLimit: number | null;
     maxPriceLimit: number | null;
+    walletAddress: string;
 }
 
 export interface ReqObj {

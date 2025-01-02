@@ -4,7 +4,7 @@ import { MenuItem, Select } from "@mui/material";
 type Props = {
     label: string;
     val: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     extraLabel?: string
     disabled?: boolean
     placeholder: string
@@ -28,6 +28,7 @@ const AppTextInput = ({
 
             <div className="relative w-full">
                 <input
+                    autoComplete="off"
                     {...rest}
                     disabled={disabled}
                     type="text"
